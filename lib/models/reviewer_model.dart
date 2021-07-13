@@ -14,7 +14,7 @@ class Reviewer{
 
 List<Reviewer> reviewer = [
   Reviewer(
-    name: 'Stave Jobs',
+    name: 'Steve Jobs',
     imageReviewer: 'https://i.imgur.com/UMUY9Yn.jpeg',
     comment: "the hotel is very good, the bed is very comfortable",
     rating: 5.0,

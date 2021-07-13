@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:submission/models/hotel_model.dart';
 import 'package:submission/screens/detailpage.dart';
+import 'package:submission/screens/mobile/home_mobile_page.dart';
+import 'package:submission/screens/web/home_web_page.dart';
 import 'package:submission/theme/theme.dart';
 import 'package:submission/widgets/rating_star.dart';
 
@@ -9,19 +11,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-              child: Column(
-          children: <Widget>[
-            HomePageTop(),
-            HomePageBottom(),
-          ],
-        ),
-      ),
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxWidth <= 700) {
+          return MobilePage();
+        } else {
+          return WebPage();
+        }
+      }),
     );
   }
 }
 
+
 class HomePageTop extends StatefulWidget {
+  final double padding;
+  HomePageTop({this.padding});
   @override
   _HomePageTopState createState() => _HomePageTopState();
 }
@@ -38,8 +43,7 @@ class _HomePageTopState extends State<HomePageTop> {
             height: 180,
             color: accentColor1,
             child: Padding(
-              padding: const EdgeInsets.only(
-                  left: defaultMargin, right: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: widget.padding),
               child: Column(
                 children: [
                   SafeArea(
@@ -128,11 +132,11 @@ class _HomePageBottomState extends State<HomePageBottom> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => DetailPage(
-                              hotel: hotel,
-                            )));
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => DetailPage(
+                                  hotel: hotel,
+                                )));
                   },
                   child: Container(
                     height: 180,
@@ -199,7 +203,8 @@ class _HomePageBottomState extends State<HomePageBottom> {
                                               fontWeight: FontWeight.w600,
                                               letterSpacing: 1.2)),
                                     ),
-                                    RatingStars(rating: hotel.rating,starSize: 20),
+                                    RatingStars(
+                                        rating: hotel.rating, starSize: 20),
                                     Row(
                                       children: <Widget>[
                                         Icon(Icons.location_on,
