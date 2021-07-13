@@ -28,13 +28,13 @@ class WebDetailPage extends StatelessWidget {
                   height: 15,
                 ),
                 CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          color: accentColor1,
-                          onPressed: () => Navigator.pop(context),
-                        ),
-                      ),
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    color: accentColor1,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),
@@ -108,11 +108,26 @@ class WebDetailPage extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                Text(hotel.name,textAlign: TextAlign.center,
+                                Text(hotel.name,
+                                    textAlign: TextAlign.center,
                                     style: blackTextFont.copyWith(
                                       fontSize: 24,
                                     )),
                                 SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(Icons.location_on,
+                                        color: Colors.black),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(hotel.location,
+                                        style: blackTextFont.copyWith(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300)),
+                                  ],
+                                ),
                                 RatingStars(
                                     rating: hotel.rating,
                                     starSize: 30,
